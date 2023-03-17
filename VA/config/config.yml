@@ -1,0 +1,42 @@
+Data:
+  train_data_root: "/data1/zww/abaw/VA_splits_w300_s200_fold_4/Train_Set"
+  val_data_root: "/data1/zww/abaw/VA_splits_w300_s200_fold_4/Validation_Set"
+  loader:
+    batch_size: 32
+    num_workers: 4
+    pin_memory: True
+    test_batch_size: 32
+
+Model:
+  model_name: Model
+  bin_num: 1
+  num_head: 4
+  num_layer: 8
+  kernel_size: 5
+  modality:
+    - wav_base
+    - wav_emotion
+    - arcface
+    - emotion
+    - affecnet8
+    - rafdb
+  # pretrained_path: ./log/all_features_head4_layer8_kernel5_dropout0.3_lr0.00003_tcn_40ep_adamW_win300_stride200/ckpt_epoch_11_iter_250.pt
+  # pretrained_path: ./log/fold_1_all_features_head4_layer8_kernel5_dropout0.3_lr0.00003_tcn_40ep_adamW_win300_stride200/ckpt_epoch_5_iter_122.pt
+  # pretrained_path: ./log/fold_2_all_features_head4_layer8_kernel5_dropout0.3_lr0.00003_tcn_40ep_adamW_win300_stride200/ckpt_epoch_13_iter_57.pt
+  # pretrained_path: ./log/fold_3_all_features_head4_layer8_kernel5_dropout0.3_lr0.00003_tcn_40ep_adamW_win300_stride200/ckpt_epoch_6_iter_220.pt
+  pretrained_path: ./log/fold_4_all_features_head4_layer8_kernel5_dropout0.3_lr0.00003_tcn_40ep_adamW_win300_stride200/ckpt_epoch_7_iter_233.pt
+
+
+
+Log:
+  log_file_path: "./log/"
+  log_file_name: "fold_4_all_features_head4_layer8_kernel5_dropout0.3_lr0.00003_tcn_40ep_adamW_win300_stride200.log"
+
+Solver:
+  loss: ccc
+  epoch: 40
+  warmup: 2
+  lr: 0.00003
+  weight_decay: 0.00001
+  optimizer: AdamW
+  dropout: 0.3

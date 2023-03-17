@@ -1,0 +1,40 @@
+Data:
+  train_data_root: "/data1/zww/abaw/EXPR_splits_w300_s200_fold_4/Train_Set"
+  val_data_root: "/data1/zww/abaw/EXPR_splits_w300_s200_fold_4/Validation_Set"
+  loader:
+    batch_size: 32
+    num_workers: 4
+    pin_memory: True
+
+Model:
+  model_name: Model
+  bin_num: 1
+  num_head: 4
+  num_layer: 8
+  kernel_size: 5
+  out_dim: 512
+  modality:
+    # - wav_base #0.255
+    # - wav_emotion #0.296
+    # - arcface #0.215
+    - emotion  #0.3862
+    - affecnet8 #0.3576
+    - rafdb #0.3661
+  pretrained_path: ./log/emotion_affecnet8_rafdb_head4_layer8_kernel5_dropout0.3_tcn_lr0.00003_bs32_20ep_adamW_win300_stride200/ckpt_epoch_15_iter_165.pt
+  # pretrained_path: ./log/fold_4_emotion_affect_rafdb_head4_layer8_kernel5_dropout0.3_tcn_lr0.00003_bs32_20ep_adamW_win300_stride200/ckpt_epoch_10_iter_161.pt
+  # pretrained_path: ./log/fold_3_emotion_affect_rafdb_head4_layer8_kernel5_dropout0.3_tcn_lr0.00003_bs32_20ep_adamW_win300_stride200/ckpt_epoch_11_iter_86.pt
+
+
+Log:
+  log_file_path: "./log/"
+  log_file_name: "fold_4_emotion_affect_rafdb_head4_layer8_kernel5_dropout0.3_tcn_lr0.00003_bs32_20ep_adamW_win300_stride200.log"
+
+Solver:
+  loss: cross_entropy 
+  epoch: 30
+  warmup: 2
+  lr: 0.00003 #0.00003
+  weight_decay: 0.00001
+  optimizer: AdamW
+  dropout: 0.3
+  label_smooth: 0
